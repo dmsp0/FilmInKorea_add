@@ -11,15 +11,13 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/thumbnails/**","/layer/**", "/api/**")
-                .addResourceLocations("file://C:/upload/","file://C:/layer/", "file://C:/photoImg/");
-
+        registry.addResourceHandler("/thumbnails/**", "/layer/**", "/api/**")
+                .addResourceLocations("file://C:/upload/", "file://C:/layer/", "file://C:/photoImg/");
     }
 
-    //맛집 api불러오기 용
+    // 맛집 API 불러오기 용
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
 }

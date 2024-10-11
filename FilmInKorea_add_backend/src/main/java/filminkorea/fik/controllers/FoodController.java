@@ -4,6 +4,7 @@ import filminkorea.fik.entities.Food;
 import filminkorea.fik.entities.FoodMap;
 import filminkorea.fik.services.FoodMapService;
 import filminkorea.fik.services.FoodService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,24 +27,20 @@ public class FoodController {
         this.foodMapService = foodMapService;
     }
 
-    // /food/all 경로로 모든 Food 데이터를 가져오는 API
+    // 모든 맛집 데이터를 가져오는 API
     @GetMapping("/all")
+    @Operation(summary = "Get all food places", description = "Retrieve a list of all food places stored in the system.")
     public List<Food> getAllFoods() {
         return foodService.getAllFoods();
     }
 
-//    // API 호출하여 데이터 저장
-//    @GetMapping("/map")
-//    public String fetchAndSaveFoodMapData() {
-//        foodMapService.fetchAndSaveFoodMapData();
-//        return "Food map data fetched and saved!";
-//    }
-
-    // 전체 FoodMap 데이터를 클라이언트에게 반환하는 API
+    // 지도에 표시할 맛집의 모든 정보 리스트를 가져오는 API
     @GetMapping("/map")
+    @Operation(summary = "Get all food places for the map", description = "Retrieve all food place information to be displayed on the map.")
     public ResponseEntity<List<FoodMap>> getAllFoodPlaces() {
         List<FoodMap> foodPlaces = foodMapService.getAllFoodPlacesOnTheMap();
         return ResponseEntity.ok(foodPlaces);
     }
+
 
 }

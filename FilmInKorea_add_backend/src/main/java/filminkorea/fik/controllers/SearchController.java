@@ -1,5 +1,6 @@
 package filminkorea.fik.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ public class SearchController {
 
     // Google Places API로 장소 검색 및 별점 추가
     @GetMapping("/place-photo")
+    @Operation(summary = "Get place details with photo and rating", description = "Search for a place using the Google Places API and retrieve details such as photos, address, name, rating, and place ID.")
     public ResponseEntity<String> getPlacePhoto(@RequestParam String query) {
         // URL 직접 생성
         String url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?" +
@@ -39,4 +41,5 @@ public class SearchController {
             return ResponseEntity.status(500).body("Error fetching search results: " + e.getMessage());
         }
     }
+
 }

@@ -26,11 +26,13 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)  // CSRF 비활성화
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers( "/content/**","/content/getLocationsAndAddressesByTitle","/content/getInformationByTitleAndPlace", "/thumbnails/**","/layer/**","/food/**", "/api/**","/festival/**").permitAll()
+                        .requestMatchers("/content/**","/content/getLocationsAndAddressesByTitle","/content/getInformationByTitleAndPlace", "/thumbnails/**","/layer/**","/food/**", "/api/**","/festival/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll() // Swagger 경로 허용
                         .anyRequest().authenticated());
 
         return httpSecurity.build();
     }
+
+    //http://localhost:8080/swagger-ui/index.html#/ api 확인 가능
 
     // 전역 CORS 설정
     @Bean
@@ -46,4 +48,3 @@ public class SecurityConfig {
         return source;
     }
 }
-
